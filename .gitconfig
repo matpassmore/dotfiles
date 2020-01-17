@@ -1,0 +1,38 @@
+[user]
+	name = Matthew Passmore
+	email = matthew@matthewpassmore.co.uk
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+    interactive = auto
+    ui = true
+    pager = true
+[color "status"]
+    added = green
+    changed = blue
+    untracked = red
+[color "diff"]
+    meta = yellow
+    old = red
+    new = green
+[alias]
+    st = status
+    ci = commit
+    br = branch
+    co = checkout
+    df = diff
+    # James Brown version control!
+    up = push
+    down = pull
+[core]
+    editor = vim
+	excludesfile = /Users/matthewpassmore/.gitignore_global
+[push]
+    default = current
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
