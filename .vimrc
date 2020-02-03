@@ -336,7 +336,8 @@ let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.php"
 
 " Set filetypes for appropriate syntax highlighting et al
 au BufRead,BufNewFile *.md,*.txt,*.TXT set filetype=markdown
-au BufRead,BufNewFile *.njk,*.nunjucks,*.nunjuck set filetype=jinja
+" au BufRead,BufNewFile *.njk,*.nunjucks,*.nunjuck set filetype=jinja
+au BufRead,BufNewFile *.njk,*.nunjucks,*.nunjuck set filetype=html
 au BufRead,BufNewFile *.php set ft=php.html
 " au BufRead,BufNewFile *.twig set ft=html
 " au BufRead,BufNewFile *.blade.php set ft=html
