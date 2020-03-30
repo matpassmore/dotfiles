@@ -1,38 +1,39 @@
 [user]
-	name = Matthew Passmore
-	email = matthew@matthewpassmore.co.uk
+  name = Matthew Passmore
+  email = matthew@matthewpassmore.co.uk
 [color]
-    diff = auto
-    status = auto
-    branch = auto
-    interactive = auto
-    ui = true
-    pager = true
+  diff = auto
+  status = auto
+  branch = auto
+  interactive = auto
+  ui = true
+  pager = true
 [color "status"]
-    added = green
-    changed = blue
-    untracked = red
+  added = green
+  changed = blue
+  untracked = red
 [color "diff"]
-    meta = yellow
-    old = red
-    new = green
+  meta = yellow
+  old = red
+  new = green
 [alias]
-    st = status
-    ci = commit
-    br = branch
-    co = checkout
-    df = diff
+  st = status
+  ci = commit
+  br = branch
+  co = checkout
+  df = diff
     # James Brown version control!
-    up = push
-    down = pull
+  up = push
+  down = pull
 [core]
-    editor = vim
-	excludesfile = /Users/matthewpassmore/.gitignore_global
+  editor = vim
+  excludesfile = /Users/matthewpassmore/.gitignore_global
+  pager = diff-so-fancy | less --tabs=4 -RFX
 [push]
-    default = current
+  default = current
 [difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+  cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+  path = 
 [mergetool "sourcetree"]
-	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+  cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+  trustExitCode = true

@@ -10,24 +10,24 @@ call plug#begin('~/.vim/plugged')
 
 " Plug 'VundleVim/Vundle.vim'             "Let Vundle manage Vundle, required
 " Plug 'ctrlpvim/ctrlp.vim'
-Plug 'cakebaker/scss-syntax.vim'
+" Plug 'cakebaker/scss-syntax.vim'
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-surround'
-Plug 'captbaritone/better-indent-support-for-php-with-html'
+" Plug 'captbaritone/better-indent-support-for-php-with-html'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/goyo.vim'
 " Plug 'rking/ag.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'wincent/terminus'
 Plug 'chriskempson/base16-vim'
-Plug 'jwalton512/vim-blade'
-Plug 'lumiliet/vim-twig'
+" Plug 'jwalton512/vim-blade'
+" Plug 'lumiliet/vim-twig'
 Plug 'blueyed/vim-diminactive'
-" Plug 'sheerun/vim-polyglot'
+Plug 'sheerun/vim-polyglot'
 " Plug 'tpope/vim-vinegar'
 Plug 'adelarsq/vim-matchit'
 " Plug 'itchyny/lightline.vim'
@@ -197,13 +197,6 @@ nnoremap <Leader>o :Files<CR>
 "/ Emmet-vim
 "/
 let g:user_emmet_leader_key='<C-e>'       "Set leader
-let g:user_emmet_install_global = 0       "Disable global mappings
-
-" Select file types
-autocmd FileType html,css,scss,php,md,php.html,html.twig,blade,blade.php,njk EmmetInstall
-
-" Insert closing comment only
-let g:user_emmet_settings = { 'html' : { 'comment_type': 'lastonly' }, 'twig' : { 'filters': 'html' }, 'php' : { 'extends': 'html', 'filters': 'html' }  }
 
 
 
@@ -336,10 +329,9 @@ let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.php"
 
 " Set filetypes for appropriate syntax highlighting et al
 au BufRead,BufNewFile *.md,*.txt,*.TXT set filetype=markdown
-" au BufRead,BufNewFile *.njk,*.nunjucks,*.nunjuck set filetype=jinja
-au BufRead,BufNewFile *.njk,*.nunjucks,*.nunjuck set filetype=html
+au BufRead,BufNewFile *.njk,*.nunjucks,*.nunjuck set filetype=jinja.html
 au BufRead,BufNewFile *.php set ft=php.html
-" au BufRead,BufNewFile *.twig set ft=html
+au BufRead,BufNewFile *.twig set ft=twig.html
 " au BufRead,BufNewFile *.blade.php set ft=html
 
 " Open splits to the right or below; more natural than the default
