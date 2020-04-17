@@ -118,7 +118,7 @@ set smartcase                             "except if we input a capital letter
 "-------------Mappings--------------"
 
 "Make it easy to edit the Vimrc file
-nmap <leader>ev :edit $MYVIMRC<cr>
+nmap <leader>ev :edit ~/.vimrc<cr>
 nmap <Leader>es :e ~/.vim/snippets/
 
 "Open netrw
@@ -168,6 +168,7 @@ set noshowmode
 "/
 "Remap triggers
 nnoremap <Leader>o :Files<CR>
+let g:fzf_preview_window = ''
 
 
 
