@@ -103,6 +103,7 @@ alias grom="git rebase origin/master"
 alias re="clear && printf '\e[3J'"
 alias bgl="base16_one-light"
 alias bgd="base16_nord"
+alias start="npm run start"
 
 alias config='/usr/bin/git --git-dir=/Users/matthewpassmore/.dotfiles/ --work-tree=/Users/matthewpassmore'
 
