@@ -467,7 +467,6 @@ nnoremap <Leader>bs :2ba<CR>
 nnoremap <leader>c :silent! !ctags -R<cr>:redraw!<cr>
 nnoremap <Leader>w :w<CR>
 nmap <Leader><Leader> V
-nnoremap <CR> G
 nnoremap <BS> gg
 
 " Make `Y` behave like `C` and `D`
