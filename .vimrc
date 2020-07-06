@@ -376,7 +376,7 @@ augroup END
 " ----------------------------------------------------------------------------
 " Prevent comment chars been added on new line creation
 " ----------------------------------------------------------------------------
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+" autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 
 " ============================================================================
@@ -387,6 +387,7 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " FZF
 " ----------------------------------------------------------------------------
 nnoremap <Leader>o :Files<CR>
+nnoremap <Leader>l :Buffers<CR>
 
 " ----------------------------------------------------------------------------
 " Emmet
