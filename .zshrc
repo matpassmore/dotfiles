@@ -205,3 +205,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_OPTS='--height 96% --reverse --preview "cat {}"'
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow -g "!{node_modules,.git,vendor}"'
+
+# Customise prompt via Starship
+# @link https://starship.rs/config/#prompt
+eval "$(starship init zsh)"
