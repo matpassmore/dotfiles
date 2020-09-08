@@ -208,4 +208,4 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --follow -g "!{node_modules,.git
 
 # Customise prompt via Starship
 # @link https://starship.rs/config/#prompt
-eval "$(starship init zsh)"
+# eval "$(starship init zsh)"
