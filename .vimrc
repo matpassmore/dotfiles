@@ -91,7 +91,7 @@ set undodir=~/.vim/undo
 " Set filetypes for appropriate syntax highlighting et al
 au BufRead,BufNewFile *.md,*.txt,*.TXT set filetype=markdown
 au BufRead,BufNewFile *.njk,*.nunjucks,*.nunjuck set filetype=jinja.html
-au BufRead,BufNewFile *.php set ft=php.html
+"au BufRead,BufNewFile *.php set ft=php.html
 au BufRead,BufNewFile *.twig set ft=twig.html
 " au BufRead,BufNewFile *.blade.php set ft=html
 
@@ -463,4 +463,6 @@ augroup mygroup
   autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
   " Update signature help on jump placeholder
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+  " Disable autocomplete on Git Commits
+  autocmd FileType gitcommit let b:coc_suggest_disable = 1
 augroup end
