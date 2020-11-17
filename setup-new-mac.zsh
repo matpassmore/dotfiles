@@ -1,6 +1,29 @@
 #!/bin/zsh
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+### Import Dotfiles
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# Import the bare repo
+git clone --bare https://github.com/matpassmore/dotfiles.git $HOME/.dotfiles
+
+# Define the alias in the current shell scope 
+alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
+# Give the files a $HOME
+config checkout
+
+# Hide untracked files from Git status
+config config status.showUntrackedFiles no
+
+# Install vim plugins
+/bin/bash -c "$(curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim)"
+
+vim -es -u vimrc -i NONE -c "PlugInstall" -c "qa"
+
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ### Install Homebrew, tools and applications
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -25,6 +48,9 @@ brew install wget
 brew install wp-cli
 brew install zsh-syntax-highlighting
 
+# Install Oh My Zsh
+/bin/bash -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
 # Install GUI tools
 brew install caskroom/cask/brew-cask
 brew install tap homebrew/cask-drivers
@@ -37,9 +63,12 @@ brew cask install dropbox
 brew cask install firefox
 brew cask install flux
 brew cask install focus
+brew cask install google-chrome
 brew cask install imageoptim
 brew cask install iterm2
 brew cask install macvim
+brew cask install marked
+brew cask install microsoft-edge
 brew cask install nvalt
 brew cask install sequel-ace
 brew cask install sketch-toolbox
@@ -85,6 +114,13 @@ npm install -g browser-sync
 npm install -g gulp
 npm install -g lighthouse
 npm install -g trash-cli
+
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+### Install Base16 Shell for colour management
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
 
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
