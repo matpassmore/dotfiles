@@ -403,6 +403,10 @@ let g:user_emmet_leader_key='<C-e>'
 let g:UltiSnipsExpandTrigger = "<nop>"
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
 
+if exists('&pythonthreedll')
+  set pythonthreedll=/usr/local/Frameworks/Python.framework/Versions/Current/Python
+endif
+
 " ----------------------------------------------------------------------------
 " Vimwiki
 " ----------------------------------------------------------------------------
