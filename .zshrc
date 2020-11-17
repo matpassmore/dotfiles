@@ -1,3 +1,4 @@
+ZSH_DISABLE_COMPFIX=true
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/matthewpassmore/.oh-my-zsh
 
@@ -50,7 +51,7 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 export NVM_LAZY_LOAD=true
-plugins=(git z history-substring-search zsh-nvm osx wp-cli)
+plugins=(git z history-substring-search osx wp-cli)
 
 # User configuration
 
@@ -209,4 +210,4 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --follow -g "!{node_modules,.git
 
 # Customise prompt via Starship
 # @link https://starship.rs/config/#prompt
-eval "$(starship init zsh)"
+# eval "$(starship init zsh)"
