@@ -27,7 +27,7 @@ vim -es -u vimrc -i NONE -c "PlugInstall" -c "qa"
 ### Install Homebrew, tools and applications
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # Install binaries
 brew install composer
@@ -56,32 +56,35 @@ brew install caskroom/cask/brew-cask
 brew install tap homebrew/cask-drivers
 
 # Applications
-brew cask install alfred
-brew cask install appcleaner
-brew cask install caffeine
-brew cask install dropbox
-brew cask install firefox
-brew cask install flux
-brew cask install focus
-brew cask install google-chrome
-brew cask install imageoptim
-brew cask install iterm2
-brew cask install macvim
-brew cask install marked
-brew cask install microsoft-edge
-brew cask install nvalt
-brew cask install sequel-ace
-brew cask install sketch-toolbox
-brew cask install skype
-brew cask install sonos
-brew cask install sourcetree
-brew cask install spectacle
-brew cask install spotify
-brew cask install superduper
-brew cask install toggl-track
-brew cask install transmit
-brew cask install typora
-brew cask install vlc
+brew install --cask alfred
+brew install --cask appcleaner
+brew install --cask caffeine
+brew install --cask camo-studio
+brew install --cask dropbox
+brew install --cask firefox
+brew install --cask flux
+brew install --cask focus
+brew install --cask google-chrome
+brew install --cask imageoptim
+brew install --cask iterm2
+brew install --cask macvim
+brew install --cask marked
+brew install --cask microsoft-edge
+brew install --cask nvalt
+brew install --cask sequel-ace
+brew install --cask sketch-toolbox
+brew install --cask skype
+brew install --cask slack
+brew install --cask sonos
+brew install --cask sourcetree
+brew install --cask spectacle
+brew install --cask spitfire-audio
+brew install --cask spotify
+brew install --cask superduper
+brew install --cask toggl-track
+brew install --cask transmit
+brew install --cask typora
+brew install --cask vlc
 
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
