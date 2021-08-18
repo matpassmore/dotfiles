@@ -16,20 +16,31 @@ Plug 'tpope/vim-surround'
 Plug 'junegunn/goyo.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'wincent/terminus'
+
 Plug 'chriskempson/base16-vim'
-Plug 'blueyed/vim-diminactive'
+" Plug 'blueyed/vim-diminactive'
 Plug 'sheerun/vim-polyglot'
 Plug 'adelarsq/vim-matchit'
-Plug 'vimwiki/vimwiki'
+" Plug 'vimwiki/vimwiki'
 Plug 'moll/vim-bbye'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'niftylettuce/vim-jinja'
 Plug 'jiangmiao/auto-pairs'
+" Plug 'michal-h21/vim-zettel'
+Plug 'SidOfc/mkdx'
+Plug 'reedes/vim-pencil'
+" Plug '2072/PHP-Indenting-for-VIm'
+" Plug 'captbaritone/better-indent-support-for-php-with-html'
+Plug 'lambdalisue/fern.vim'
+Plug 'lambdalisue/nerdfont.vim'
+Plug 'lambdalisue/fern-renderer-nerdfont.vim'
+Plug 'dense-analysis/ale'
+" Plug 'itchyny/lightline.vim'
 
 " Initialize plugin system
-call plug#end() 
+call plug#end()
 
 
 " ============================================================================
@@ -41,12 +52,13 @@ let mapleader="\<Space>"
 " Allow motions and back-spacing over line-endings etc
 set backspace=indent,eol,start
 set whichwrap=h,l,b,<,>,~,[,]
-                           
+
 " UTF encoding
 set encoding=utf-8
 set fileencoding=utf-8
 
 " Netrw config
+let g:netrw_preview   = 1
 let g:netrw_banner=0
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+,\(^\|\s\s\)ntuser\.\S\+'
 autocmd FileType netrw set nolist
@@ -91,9 +103,9 @@ set undodir=~/.vim/undo
 " Set filetypes for appropriate syntax highlighting et al
 au BufRead,BufNewFile *.md,*.txt,*.TXT set filetype=markdown
 au BufRead,BufNewFile *.njk,*.nunjucks,*.nunjuck set filetype=jinja.html
-"au BufRead,BufNewFile *.php set ft=php.html
+au BufRead,BufNewFile *.php set ft=php.html
 au BufRead,BufNewFile *.twig set ft=twig.html
-" au BufRead,BufNewFile *.blade.php set ft=html
+au BufRead,BufNewFile *.blade.php set ft=blade.html
 
 " Open splits to the right or below; more natural than the default
 set splitright
@@ -140,6 +152,10 @@ set updatetime=300
 " don't give |ins-completion-menu| messages.
 set shortmess+=c
 
+" Display line numbers
+" set number
+set numberwidth=6
+
 " ----------------------------------------------------------------------------
 " Tabs, indentation and lines
 " ----------------------------------------------------------------------------
@@ -174,8 +190,8 @@ if filereadable(expand("~/.vimrc_background"))
 endif
 
 if has('gui_running')
- set background=light
- set guifont=FiraCode-Light:h16
+ " set background=light
+ set guifont=IBMPlexMono:h17
  set linespace=14
 
  " remove right scroll bar
@@ -187,7 +203,7 @@ endif
 
 " Colour the 73rd column so that we don't type over our limit
 if exists("+colorcolumn")
-    set colorcolumn=+1
+    " set colorcolumn=+1
 endif
 
 " Italicised comments and attributes
@@ -197,12 +213,16 @@ highlight htmlArg cterm=italic
 " Force transparent background for line-numbers' columns
 highlight LineNr term=bold cterm=NONE ctermfg=08 ctermbg=NONE gui=NONE guifg=#4e4e4e guibg=NONE
 highlight SignColumn term=bold cterm=NONE ctermfg=08 ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
-highlight StatusLine ctermbg=bg guibg=bg
+highlight StatusLine ctermbg=NONE guibg=NONE
 
 " Fake a custom left padding for each window.
-hi LineNr ctermbg=bg
-hi foldcolumn ctermbg=bg
-set foldcolumn=2
+highlight foldcolumn ctermbg=NONE guibg=NONE
+set foldcolumn=3
+
+" Style splits
+highlight VertSplit guibg=NONE guifg=Orange ctermbg=NONE ctermfg=6
+
+set cursorline
 
 " ----------------------------------------------------------------------------
 " Search
@@ -233,7 +253,7 @@ nmap <Leader>es :e ~/.vim/snippets/
 nmap - :Explore<CR>
 
 " Find-in-project search
-nnoremap <Leader>a :Rg<Space>
+nnoremap <Leader>a :Rg<space>
 
 " Move lines up or down
 " Symbols correspond to OSx <A-j> and <A-k>
@@ -390,7 +410,14 @@ nnoremap <Leader>o :Files<CR>
 nnoremap <Leader>l :Buffers<CR>
 
 " Enable passing of arguments to ripgrep
-command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".<q-args>, 1, <bang>0)
+command! -bang -nargs=* Rg
+    \ call fzf#vim#grep(
+    \   'rg --column --line-number --no-heading --color=always --smart-case --sortr=modified '.shellescape(<q-args>), 1,
+    \   {'options': '--layout=reverse --delimiter : --nth 4..'}, <bang>0)
+
+command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, {
+    \ 'options': ['--layout=reverse', '--info=inline', '--preview', 'cat {}']}, <bang>0)
 
 " ----------------------------------------------------------------------------
 " Emmet
@@ -410,9 +437,70 @@ endif
 " ----------------------------------------------------------------------------
 " Vimwiki
 " ----------------------------------------------------------------------------
-let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
+" let g:vimwiki_list = [{'path': '~/Dropbox/Notes/', 'syntax': 'markdown', 'ext': '.md'}]
 let g:vimwiki_global_ext = 0
 nmap <Leader>d <Plug>VimwikiToggleListItem
+
+" ----------------------------------------------------------------------------
+" Vim-zettel
+" ----------------------------------------------------------------------------
+let g:zettel_format = "%Y%m%d%H%M"
+let g:zettel_link_format="[[%link]]"
+let g:zettel_fzf_command = "rg --column --line-number --smart-case --no-heading --color=always --sortr=modified"
+" let g:zettel_options = [{"template" :  "~/Dropbox/zettelkasten/template.tpl", "disable_front_matter": 1}]
+let g:zettel_fzf_options = ['--reverse']
+nnoremap <leader>zn :ZettelNew<space>
+nnoremap <leader>za :ZettelOpen<CR>
+
+" ----------------------------------------------------------------------------
+" MKDX
+" ----------------------------------------------------------------------------
+let g:mkdx#settings     = { 'highlight': { 'enable': 1 },
+                        \ 'enter': { 'shift': 1 },
+                        \ 'links': { 'external': { 'enable': 1 } },
+                        \ 'toc': { 'text': 'Table of Contents', 'update_on_write': 1 },
+                        \ 'fold': { 'enable': 1 } }
+
+fun! s:MkdxGoToHeader(header)
+    " given a line: '  84: # Header'
+    " this will match the number 84 and move the cursor to the start of that line
+    call cursor(str2nr(get(matchlist(a:header, ' *\([0-9]\+\)'), 1, '')), 1)
+endfun
+
+fun! s:MkdxFormatHeader(key, val)
+    let text = get(a:val, 'text', '')
+    let lnum = get(a:val, 'lnum', '')
+
+    " if the text is empty or no lnum is present, return the empty string
+    if (empty(text) || empty(lnum)) | return text | endif
+
+    " We can't jump to it if we dont know the line number so that must be present in the outpt line.
+    " We also add extra padding up to 4 digits, so I hope your markdown files don't grow beyond 99.9k lines ;)
+    return repeat(' ', 4 - strlen(lnum)) . lnum . ': ' . text
+endfun
+
+fun! s:MkdxFzfQuickfixHeaders()
+    " passing 0 to mkdx#QuickfixHeaders causes it to return the list instead of opening the quickfix list
+    " this allows you to create a 'source' for fzf.
+    " first we map each item (formatted for quickfix use) using the function MkdxFormatHeader()
+    " then, we strip out any remaining empty headers.
+    let headers = filter(map(mkdx#QuickfixHeaders(0), function('<SID>MkdxFormatHeader')), 'v:val != ""')
+
+    " run the fzf function with the formatted data and as a 'sink' (action to execute on selected entry)
+    " supply the MkdxGoToHeader() function which will parse the line, extract the line number and move the cursor to it.
+    call fzf#run(fzf#wrap({
+      \ 'source': headers,
+      \ 'sink': function('<SID>MkdxGoToHeader'),
+      \ 'options': '--layout=reverse'
+      \ }))
+endfun
+
+" finally, map it -- in this case, I mapped it to overwrite the default action for toggling quickfix (<PREFIX>I)
+nnoremap <silent> <Leader>i :call <SID>MkdxFzfQuickfixHeaders()<Cr>
+
+" ----------------------------------------------------------------------------
+" Vim-polyglot
+" ----------------------------------------------------------------------------
 
 " ----------------------------------------------------------------------------
 " Buffer Bye
@@ -470,3 +558,130 @@ augroup mygroup
   " Disable autocomplete on Git Commits
   autocmd FileType gitcommit let b:coc_suggest_disable = 1
 augroup end
+
+" augroup ReduceNoise
+"     autocmd!
+"     " Automatically resize active split to 85 width
+"     autocmd WinEnter * :call ResizeSplits()
+" augroup END
+
+" function! ResizeSplits()
+"     set winwidth=85
+"     wincmd =
+" endfunction
+
+let g:pencil#wrapModeDefault = 'soft'   " default is 'hard'
+augroup pencil
+  autocmd!
+  autocmd FileType markdown,mkd call pencil#init()
+  autocmd FileType text         call pencil#init()
+augroup END
+
+let g:mkdx#settings = { 'tab': { 'enable': 0 } }
+
+" " This is only availale in the quickfix window, owing to the filetype
+" " restriction on the autocmd (see below).
+" function! <SID>OpenQuickfix(new_split_cmd)
+"   " 1. the current line is the result idx as we are in the quickfix
+"   let l:qf_idx = line('.')
+"   " 2. jump to the previous window
+"   wincmd p
+"   " 3. switch to a new split (the new_split_cmd will be 'vnew' or 'split')
+"   execute a:new_split_cmd
+"   " 4. open the 'current' item of the quickfix list in the newly created buffer
+"   "    (the current means, the one focused before switching to the new buffer)
+"   execute l:qf_idx . 'cc'
+" endfunction
+
+" autocmd FileType qf nnoremap <buffer> <C-v> :call <SID>OpenQuickfix("vnew")<CR>
+" autocmd FileType qf nnoremap <buffer> <C-x> :call <SID>OpenQuickfix("split")<CR>
+
+" CTRL-A CTRL-Q to select all and build quickfix list
+
+function! s:build_quickfix_list(lines)
+  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+  copen
+  cc
+endfunction
+
+let g:fzf_action = {
+  \ 'ctrl-q': function('s:build_quickfix_list'),
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
+
+" ----------------------------------------------------------------------------
+" Fern
+" ----------------------------------------------------------------------------
+
+noremap <silent> <Leader>f :Fern . -drawer -reveal=% -toggle -width=35<CR><C-w>=
+
+let g:fern#drawer_width = 35
+let g:fern#default_hidden = 1
+let g:fern#disable_drawer_auto_quit = 1
+
+"noremap <silent> <A-f> :Fern . -drawer -toggle <CR>
+
+function! s:init_fern() abort
+  nmap <buffer> H <Plug>(fern-action-open:split)
+  nmap <buffer> V <Plug>(fern-action-open:vsplit)
+  nmap <buffer> R <Plug>(fern-action-rename)
+	nmap <buffer> M <Plug>(fern-action-move)
+	nmap <buffer> C <Plug>(fern-action-copy)
+	nmap <buffer> N <Plug>(fern-action-new-path)
+	nmap <buffer> T <Plug>(fern-action-new-file)
+	nmap <buffer> D <Plug>(fern-action-new-dir)
+	nmap <buffer> S <Plug>(fern-action-hidden-toggle)
+	nmap <buffer> dd <Plug>(fern-action-trash)
+  nmap <buffer> <leader> <Plug>(fern-action-mark)
+endfunction
+
+augroup fern-custom
+  autocmd! *
+  autocmd FileType fern call s:init_fern()
+augroup END
+
+let g:fern#renderer = "nerdfont"
+
+" ----------------------------------------------------------------------------
+" ALE
+" ----------------------------------------------------------------------------
+
+let g:ale_fixers = {
+\    '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'css': ['prettier'],
+\   'javascript': ['prettier', 'eslint'],
+\   'json': ['prettier'],
+\   'scss': ['prettier'],
+\   'yaml': ['prettier'],
+\   'php': ['php_cs_fixer', 'phpcbf'],
+\}
+
+" let g:ale_fix_on_save = 1
+
+let g:ale_disable_lsp = 1
+
+let g:ale_set_highlights = 0
+
+" highlight clear ALEErrorSign
+highlight ALEErrorSign ctermbg=NONE ctermfg=131
+highlight ALEWarningSign ctermbg=NONE ctermfg=100
+
+" ----------------------------------------------------------------------------
+" Lighline status bar
+" ----------------------------------------------------------------------------
+
+set noshowmode
+
+let g:lightline = {
+      \ 'colorscheme': 'nord',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'FugitiveHead'
+      \ },
+      \ }

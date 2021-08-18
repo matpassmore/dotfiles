@@ -67,7 +67,7 @@ source $ZSH/oh-my-zsh.sh
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-  export EDITOR='mvim'
+  export EDITOR='nvim'
 fi
 
 # Compilation flags
@@ -205,7 +205,8 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_OPTS='--height 96% --reverse --preview "cat {}"'
+# export FZF_DEFAULT_OPTS='--height 96% --reverse --preview "cat {}"'
+export FZF_DEFAULT_OPTS='--reverse'
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow -g "!{node_modules,.git,vendor}"'
 
 # Customise prompt via Starship

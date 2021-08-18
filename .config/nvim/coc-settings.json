@@ -1,5 +1,6 @@
 {
   "snippets.extends": {
     "scss": ["css", "scss"]
-  }
+  },
+  "diagnostic.displayByAle": true
 }
